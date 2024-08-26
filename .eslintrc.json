@@ -1,3 +1,8 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "next",
+    "plugin:@next/next/recommended",
+    "prettier",
+    "plugin:prettier/recommended"
+  ]
 }
