@@ -4,5 +4,8 @@
     "plugin:@next/next/recommended",
     "prettier",
     "plugin:prettier/recommended"
-  ]
+  ],
+  "rules": {
+    "quotes": ["error", "single"]
+  }
 }
