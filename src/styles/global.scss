@@ -7,3 +7,7 @@ body {
   line-height: font-sizes.$body-line-space;
   color: colors.$black;
 }
+
+* {
+  transition: all 0.3s ease-out;
+}
