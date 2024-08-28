@@ -1,0 +1,52 @@
+@use '@/styles/variables/font-sizes';
+@use '@/styles/variables/colors';
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: font-sizes.$subtitle-size;
+  text-transform: uppercase;
+  font-weight: font-sizes.$bold-weight;
+  height: 3rem;
+  min-width: 10rem;
+  padding: 1rem 2rem;
+  background-color: transparent;
+  border: none;
+
+  &__icon {
+    margin-left: 0.5em;
+  }
+
+  &:hover:not(:disabled) {
+    cursor: pointer;
+    color: colors.$orange;
+  }
+
+  &[data-variant='outlined'] {
+    border: 1px solid colors.$black;
+    background-color: colors.$white;
+    color: colors.$black;
+
+    &:hover:not(:disabled) {
+      background-color: colors.$black;
+      color: colors.$white;
+    }
+  }
+
+  &[data-variant='contained'] {
+    border: none;
+    background-color: colors.$orange;
+    color: colors.$white;
+
+    &:hover:not(:disabled) {
+      background-color: colors.$soft-orange;
+      color: colors.$white;
+    }
+  }
+
+  &:disabled {
+    opacity: 0.75;
+    cursor: not-allowed;
+  }
+}
