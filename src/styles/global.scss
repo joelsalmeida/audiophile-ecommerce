@@ -1,6 +1,12 @@
 @use '@/styles/variables/_colors';
 @use '@/styles/variables/_font-sizes';
 
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
 body {
   font-size: font-sizes.$body-size;
   font-weight: 500;
