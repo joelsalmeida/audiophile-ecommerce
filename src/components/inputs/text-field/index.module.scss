@@ -1,0 +1,22 @@
+@use '@/styles/variables/colors';
+@use '@/styles/variables/font-sizes';
+
+.textField {
+  outline: none;
+  height: 3.5rem;
+  padding: 0 1.5rem;
+  border: 1px solid colors.$soft-gray;
+  border-radius: 8px; // TODO: Create a radius variable if necessary
+  font-size: font-sizes.$overline-size;
+  font-weight: font-sizes.$bold-weight;
+  background: colors.$white;
+  caret-color: colors.$orange;
+
+  &:focus-visible {
+    border-color: colors.$orange;
+  }
+
+  &[data-error='true'] {
+    border-color: colors.$error;
+  }
+}
