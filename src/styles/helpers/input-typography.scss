@@ -1,0 +1,7 @@
+@use '@/styles/variables/colors';
+@use '@/styles/variables/font-sizes';
+
+.inputTypography {
+  font-size: font-sizes.$overline-size;
+  font-weight: font-sizes.$bold-weight;
+}
