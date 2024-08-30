@@ -1,0 +1,36 @@
+@use '@/styles/variables/colors';
+@use '@/styles/variables/font-sizes';
+@use '@/styles/helpers/input-rounded-box';
+
+.radioButton {
+  @extend .inputRoundedBox;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  &:not(:disabled):hover,
+  &:has(&__input:checked) {
+    border: 1px solid colors.$orange;
+  }
+
+  &__input {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    padding: 3px;
+    border: 2px solid colors.$soft-gray;
+    border-radius: 50%;
+    appearance: none;
+    background-color: transparent;
+    outline: none;
+
+    &:not(:disabled):checked {
+      background-clip: content-box;
+      background-image: radial-gradient(
+        circle,
+        colors.$orange 50%,
+        transparent 100%
+      );
+    }
+  }
+}
