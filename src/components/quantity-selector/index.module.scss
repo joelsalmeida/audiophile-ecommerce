@@ -1,0 +1,40 @@
+@use '@/styles/variables/font-sizes';
+@use '@/styles/variables/colors';
+
+.quantitySelector {
+  display: flex;
+  width: 7.5rem;
+  height: 3rem;
+  font-size: font-sizes.$overline-size;
+
+  &__button {
+    width: 2.5rem;
+    color: hsla(0, 0%, 0%, 0.5);
+    font-weight: font-sizes.$bold-weight;
+
+    &:hover:not(:disabled) {
+      color: colors.$orange;
+      cursor: pointer;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  &__input {
+    width: 2.5rem;
+    text-align: center;
+    caret-color: colors.$orange;
+
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+  &__input,
+  &__button {
+    border: none;
+    background-color: colors.$light-gray;
+  }
+}
