@@ -36,43 +36,45 @@ export function Header() {
   }
 
   return (
-    <header className={styles.header}>
-      <div
-        ref={HAMBURGER_REF}
-        className={styles.header__hamburger}
-        data-mobile-menu-open={openMobileMenu}
-        onClick={toggleMobileMenu}
-      >
-        <span />
-        <span />
-        <span />
+    <header className={styles.header__container}>
+      <div className={styles.header}>
+        <div
+          ref={HAMBURGER_REF}
+          className={styles.header__hamburger}
+          data-mobile-menu-open={openMobileMenu}
+          onClick={toggleMobileMenu}
+        >
+          <span />
+          <span />
+          <span />
+        </div>
+
+        <Link href="/">
+          <Image
+            src="/audiophile-logo.svg"
+            alt="Audiophile logo"
+            width={143}
+            height={25}
+            onClick={() => setOpenMobileMenu(false)}
+          />
+        </Link>
+
+        <nav
+          ref={NAV_REF}
+          className={styles.header__nav}
+          data-mobile-menu-open={openMobileMenu}
+        >
+          {renderLinks(LINKS_DATA)}
+        </nav>
+
+        <button
+          className={styles.header__cartButton}
+          type="button"
+          onClick={() => console.log('Open cart')}
+        >
+          <Image src="/cart-icon.svg" alt="Open cart" width={23} height={20} />
+        </button>
       </div>
-
-      <Link href="/">
-        <Image
-          src="/audiophile-logo.svg"
-          alt="Audiophile logo"
-          width={143}
-          height={25}
-          onClick={() => setOpenMobileMenu(false)}
-        />
-      </Link>
-
-      <nav
-        ref={NAV_REF}
-        className={styles.header__nav}
-        data-mobile-menu-open={openMobileMenu}
-      >
-        {renderLinks(LINKS_DATA)}
-      </nav>
-
-      <button
-        className={styles.header__cartButton}
-        type="button"
-        onClick={() => console.log('Open cart')}
-      >
-        <Image src="/cart-icon.svg" alt="Open cart" width={23} height={20} />
-      </button>
     </header>
   );
 }

@@ -2,6 +2,13 @@
 @use '@/styles/variables/colors';
 @use '@/styles/variables/breakpoints';
 
+.header__container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: colors.$soft-black;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -10,7 +17,8 @@
   position: sticky;
   top: 0;
   padding: 1rem 2rem;
-  background-color: colors.$soft-black;
+  max-width: breakpoints.$large-screen-size;
+  width: 100%;
 
   &__hamburger {
     display: flex;
@@ -20,7 +28,7 @@
     height: 1rem;
     cursor: pointer;
 
-    @media only screen and (min-width: breakpoints.$table-screen-size) {
+    @media only screen and (min-width: breakpoints.$medium-size) {
       display: none;
     }
 
@@ -47,7 +55,7 @@
     &[data-mobile-menu-open='false'] {
       display: none;
 
-      @media only screen and (min-width: 960px) {
+      @media only screen and (min-width: breakpoints.$medium-size) {
         display: flex;
       }
     }
@@ -57,7 +65,7 @@
     gap: 1rem;
     background: #101010;
 
-    @media only screen and (max-width: 960px) {
+    @media only screen and (max-width: breakpoints.$medium-size) {
       padding: 2rem;
       width: 100%;
       flex-direction: column;
@@ -66,7 +74,7 @@
       position: absolute;
     }
 
-    @media only screen and (min-width: 960px) {
+    @media only screen and (min-width: breakpoints.$medium-size) {
       display: flex;
       align-items: center;
       gap: 1rem;
