@@ -12,6 +12,11 @@ body {
   font-weight: 500;
   line-height: font-sizes.$body-line-space;
   color: colors.$black;
+  margin: 0;
+}
+
+a {
+  line-height: 1;
 }
 
 * {
