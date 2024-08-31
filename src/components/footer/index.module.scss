@@ -1,0 +1,89 @@
+@use '@/styles/variables/colors';
+@use '@/styles/variables/font-sizes';
+
+.footer__container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: colors.$soft-black;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: colors.$soft-black;
+  color: colors.$white;
+  text-align: center;
+  max-width: 1024px;
+  width: 100%;
+
+  @media only screen and (min-width: 768px) {
+    text-align: left;
+  }
+
+  &__top {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    @media only screen and (min-width: 1024px) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  &__content__bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    @media only screen and (min-width: 768px) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  &__content {
+    opacity: 0.5;
+
+    p {
+      @media only screen and (min-width: 768px) {
+        max-width: 540px;
+      }
+    }
+  }
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    @media only screen and (min-width: 768px) {
+      flex-direction: row;
+    }
+
+    &__link {
+      text-transform: uppercase;
+      font-size: font-sizes.$subtitle-size;
+      letter-spacing: font-sizes.$subtitle-char-space;
+      color: colors.$white;
+      text-decoration: none;
+
+      &:hover {
+        color: colors.$soft-orange;
+      }
+
+      &[data-active='true'] {
+        color: colors.$orange;
+      }
+    }
+  }
+
+  &__social {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+}
