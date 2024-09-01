@@ -17,10 +17,10 @@
   background-color: colors.$soft-black;
   color: colors.$white;
   text-align: center;
-  max-width: breakpoints.$large-screen-size;
+  max-width: breakpoints.$lg;
   width: 100%;
 
-  @media only screen and (min-width: breakpoints.$medium-screen-size) {
+  @media only screen and (min-width: breakpoints.$sm) {
     text-align: left;
   }
 
@@ -29,7 +29,7 @@
     flex-direction: column;
     gap: 2rem;
 
-    @media only screen and (min-width: breakpoints.$large-screen-size) {
+    @media only screen and (min-width: breakpoints.$lg) {
       flex-direction: row;
       justify-content: space-between;
     }
@@ -40,7 +40,7 @@
     flex-direction: column;
     gap: 2rem;
 
-    @media only screen and (min-width: breakpoints.$medium-screen-size) {
+    @media only screen and (min-width: breakpoints.$sm) {
       flex-direction: row;
       justify-content: space-between;
     }
@@ -50,7 +50,7 @@
     opacity: 0.5;
 
     p {
-      @media only screen and (min-width: breakpoints.$medium-screen-size) {
+      @media only screen and (min-width: breakpoints.$sm) {
         max-width: 540px;
       }
     }
@@ -61,7 +61,7 @@
     flex-direction: column;
     gap: 1rem;
 
-    @media only screen and (min-width: breakpoints.$medium-screen-size) {
+    @media only screen and (min-width: breakpoints.$sm) {
       flex-direction: row;
     }
 

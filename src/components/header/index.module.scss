@@ -17,7 +17,7 @@
   position: sticky;
   top: 0;
   padding: 1rem 2rem;
-  max-width: breakpoints.$large-screen-size;
+  max-width: breakpoints.$lg;
   width: 100%;
 
   &__hamburger {
@@ -28,7 +28,7 @@
     height: 1rem;
     cursor: pointer;
 
-    @media only screen and (min-width: breakpoints.$medium-size) {
+    @media only screen and (min-width: breakpoints.$md) {
       display: none;
     }
 
@@ -55,7 +55,7 @@
     &[data-mobile-menu-open='false'] {
       display: none;
 
-      @media only screen and (min-width: breakpoints.$medium-size) {
+      @media only screen and (min-width: breakpoints.$md) {
         display: flex;
       }
     }
@@ -65,7 +65,7 @@
     gap: 1rem;
     background: #101010;
 
-    @media only screen and (max-width: breakpoints.$medium-size) {
+    @media only screen and (max-width: breakpoints.$md) {
       padding: 2rem;
       width: 100%;
       flex-direction: column;
@@ -74,7 +74,7 @@
       position: absolute;
     }
 
-    @media only screen and (min-width: breakpoints.$medium-size) {
+    @media only screen and (min-width: breakpoints.$md) {
       display: flex;
       align-items: center;
       gap: 1rem;

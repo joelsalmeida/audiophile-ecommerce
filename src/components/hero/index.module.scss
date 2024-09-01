@@ -12,12 +12,12 @@
   background-repeat: no-repeat;
   background-size: contain;
 
-  @media only screen and (min-width: breakpoints.$medium-screen-size) {
+  @media only screen and (min-width: breakpoints.$sm) {
     background-image: url('/home/tablet/image-header.jpg');
     background-position: right;
   }
 
-  @media only screen and (min-width: breakpoints.$large-screen-size) {
+  @media only screen and (min-width: breakpoints.$lg) {
     background-image: url('/home/desktop/image-header.jpg');
     background-position: center;
   }
@@ -31,16 +31,16 @@
   color: colors.$white;
   text-align: center;
   padding: 4rem 2rem;
-  max-width: breakpoints.$large-screen-size;
+  max-width: breakpoints.$lg;
   width: 100%;
   margin: 0 auto;
 
-  @media only screen and (min-width: breakpoints.$medium-screen-size) {
+  @media only screen and (min-width: breakpoints.$sm) {
     text-align: left;
     align-items: flex-start;
   }
 
-  @media only screen and (min-width: breakpoints.$medium-screen-size) {
+  @media only screen and (min-width: breakpoints.$sm) {
     &__overline,
     &__header,
     &__overline,
