@@ -1,0 +1,70 @@
+@use '@/styles/variables/colors';
+@use '@/styles/variables/font-sizes';
+@use '@/styles/variables/breakpoints';
+
+.hero__container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #191919;
+  background-image: url('/home/mobile/image-header.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  @media only screen and (min-width: breakpoints.$medium-screen-size) {
+    background-image: url('/home/tablet/image-header.jpg');
+    background-position: right;
+  }
+
+  @media only screen and (min-width: breakpoints.$large-screen-size) {
+    background-image: url('/home/desktop/image-header.jpg');
+    background-position: center;
+  }
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  color: colors.$white;
+  text-align: center;
+  padding: 4rem 2rem;
+  max-width: breakpoints.$large-screen-size;
+  width: 100%;
+  margin: 0 auto;
+
+  @media only screen and (min-width: breakpoints.$medium-screen-size) {
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  @media only screen and (min-width: breakpoints.$medium-screen-size) {
+    &__overline,
+    &__header,
+    &__overline,
+    &__description {
+      max-width: 23rem;
+    }
+  }
+
+  &__overline {
+    font-size: font-sizes.$overline-size;
+    line-height: font-sizes.$overline-line-space;
+    letter-spacing: font-sizes.$overline-char-space;
+  }
+
+  &__header {
+    text-transform: uppercase;
+    font-size: font-sizes.$h2-size;
+    line-height: font-sizes.$h2-line-space;
+    letter-spacing: font-sizes.$h2-char-space;
+    font-weight: font-sizes.$bold-weight;
+  }
+
+  &__overline,
+  &__description {
+    opacity: 0.5;
+  }
+}
