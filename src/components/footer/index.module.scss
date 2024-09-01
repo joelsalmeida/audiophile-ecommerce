@@ -47,7 +47,7 @@
   }
 
   &__content {
-    opacity: 0.5;
+    color: rgba(colors.$white, 0.5);
 
     p {
       @media only screen and (min-width: breakpoints.$sm) {
