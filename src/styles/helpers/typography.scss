@@ -1,0 +1,56 @@
+@use '@/styles/variables/font-sizes';
+@use '@/styles/variables/colors';
+
+.h1 {
+  font-size: font-sizes.$h1-size;
+  line-height: font-sizes.$h1-line-space;
+  letter-spacing: font-sizes.$h1-char-space;
+  font-weight: font-sizes.$bold-weight;
+}
+
+.h2 {
+  font-size: font-sizes.$h2-size;
+  line-height: font-sizes.$h2-line-space;
+  letter-spacing: font-sizes.$h2-char-space;
+  font-weight: font-sizes.$bold-weight;
+}
+
+.h3 {
+  font-size: font-sizes.$h3-size;
+  line-height: font-sizes.$h3-line-space;
+  letter-spacing: font-sizes.$h3-char-space;
+  font-weight: font-sizes.$bold-weight;
+}
+
+.h4 {
+  font-size: font-sizes.$h4-size;
+  line-height: font-sizes.$h4-line-space;
+  letter-spacing: font-sizes.$h4-char-space;
+  font-weight: font-sizes.$bold-weight;
+}
+
+.h5 {
+  font-size: font-sizes.$h5-size;
+  line-height: font-sizes.$h5-line-space;
+  letter-spacing: font-sizes.$h5-char-space;
+  font-weight: font-sizes.$bold-weight;
+}
+
+.h6 {
+  font-size: font-sizes.$h6-size;
+  line-height: font-sizes.$h6-line-space;
+  letter-spacing: font-sizes.$h6-char-space;
+  font-weight: font-sizes.$bold-weight;
+}
+
+.overline {
+  font-size: font-sizes.$overline-size;
+  line-height: font-sizes.$overline-line-space;
+  letter-spacing: font-sizes.$overline-char-space;
+}
+
+.subtitle {
+  font-size: font-sizes.$subtitle-size;
+  line-height: font-sizes.$subtitle-line-space;
+  letter-spacing: font-sizes.$subtitle-char-space;
+}
