@@ -6,7 +6,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 2rem;
-  max-width: breakpoints.$lg;
+  max-width: calc(breakpoints.$lg + 4rem); // 4rem to compensate padding
   width: 100%;
   margin: 0 auto;
 }
