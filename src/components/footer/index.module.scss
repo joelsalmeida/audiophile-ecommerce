@@ -47,7 +47,14 @@
   }
 
   &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
     color: rgba(colors.$white, 0.5);
+
+    @media only screen and (min-width: breakpoints.$sm) {
+      gap: 5rem;
+    }
 
     p {
       @media only screen and (min-width: breakpoints.$sm) {
