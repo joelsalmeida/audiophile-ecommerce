@@ -1,0 +1,67 @@
+@use '@/styles/variables/breakpoints';
+@use '@/styles/variables/colors';
+@use '@/styles/helpers/typography';
+@use '@/styles/variables/font-sizes';
+
+.aboutSection {
+  margin-top: 2rem; // TODO: Maybe remove this
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  @media only screen and (min-width: breakpoints.$lg) {
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 2rem;
+    text-align: left;
+  }
+
+  &__image {
+    max-width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+
+    @media only screen and (min-width: breakpoints.$md) {
+      height: 18.75rem;
+    }
+
+    @media only screen and (min-width: breakpoints.$lg) {
+      width: 50%;
+      height: 36.75rem;
+    }
+
+    &__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__content {
+    @media only screen and (min-width: breakpoints.$lg) {
+      width: 50%;
+      padding-right: 6rem;
+    }
+
+    &__title {
+      @extend .h4;
+      text-transform: uppercase;
+      margin-bottom: 1em;
+
+      @media only screen and (min-width: breakpoints.$lg) {
+        font-size: font-sizes.$h2-size;
+        line-height: font-sizes.$h2-line-space;
+        letter-spacing: font-sizes.$h2-char-space;
+        font-weight: font-sizes.$bold-weight;
+      }
+
+      span {
+        color: colors.$orange;
+      }
+    }
+
+    &__description {
+      color: rgba(colors.$black, 0.5);
+    }
+  }
+}
