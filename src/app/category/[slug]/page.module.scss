@@ -1,0 +1,26 @@
+@use '@/styles/helpers/typography';
+@use '@/styles/variables/colors';
+
+.categoryPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  max-width: calc(1110px + 4rem);
+  width: 100%;
+  margin: 0 auto;
+}
+
+.title {
+  @extend .h2;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 12rem;
+  text-align: center;
+  color: colors.$white;
+  border-top: 4px solid #1a1a1a;
+  background-color: colors.$soft-black;
+}
