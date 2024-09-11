@@ -7,21 +7,38 @@ import {
   CategoryCardItem,
 } from '@/components/category-card';
 
-import { HEADPHONES_DATA } from './data';
+import {
+  HEADPHONES_DATA,
+  EARPHONES_DATA,
+  SPEAKERS_DATA,
+  ProductPreviewCardData,
+} from './data';
 import { CATEGORIES_DATA } from './data';
 
-type CategoryParams = { params: { slug: string } };
+type CategoryParams = {
+  params: { slug: 'headphones' | 'earphones' | 'speakers' };
+};
 
 // TODO: Review this page
 export default function CategoryPage({ params }: CategoryParams) {
+  const DATA_MAPPER: Record<
+    CategoryParams['params']['slug'],
+    ProductPreviewCardData
+  > = {
+    headphones: HEADPHONES_DATA,
+    earphones: EARPHONES_DATA,
+    speakers: SPEAKERS_DATA,
+  };
+
   return (
     <>
       <h1 className={styles.title}>{params.slug}</h1>
 
       <main className={styles.categoryPage}>
-        {HEADPHONES_DATA.map((product) => (
-          <ProductPreviewCard {...product} key={product.name} />
-        ))}
+        {params.slug &&
+          DATA_MAPPER[params.slug].map((product) => (
+            <ProductPreviewCard {...product} key={product.name} />
+          ))}
 
         <CategoryCardContainer>
           {CATEGORIES_DATA.map((category) => (

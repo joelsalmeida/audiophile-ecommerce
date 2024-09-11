@@ -1,3 +1,25 @@
+export type ProductPreviewCardData = {
+  images: {
+    alt: string;
+    sm: {
+      path: string;
+    };
+    md: {
+      path: string;
+    };
+    lg: {
+      path: string;
+    };
+  };
+  name: string;
+  description: string;
+  newProduct: boolean;
+  anchor: {
+    href: string;
+    label: string;
+  };
+}[];
+
 const XX99_ONE = {
   images: {
     alt: '',
@@ -59,7 +81,74 @@ const XX59 = {
   anchor: { href: '#', label: 'See Product' },
 };
 
-export const HEADPHONES_DATA = [XX99_ONE, XX99_TWO, XX59];
+const YX1 = {
+  images: {
+    alt: '',
+    sm: {
+      path: '/product-yx1-earphones/mobile/image-category-page-preview.jpg',
+    },
+    md: {
+      path: '/product-yx1-earphones/tablet/image-category-page-preview.jpg',
+    },
+    lg: {
+      path: '/product-yx1-earphones/desktop/image-category-page-preview.jpg',
+    },
+  },
+  name: 'YX1 wireless earphones',
+  description:
+    'Tailor your listening experience with bespoke dynamic drivers from the new YX1 Wireless Earphones. Enjoy incredible high-fidelity sound even in noisy environments with its active noise cancellation feature.',
+  newProduct: true,
+  anchor: { href: '#', label: 'See Product' },
+};
+
+const ZX9 = {
+  images: {
+    alt: '',
+    sm: {
+      path: '/product-zx9-speaker/mobile/image-category-page-preview.jpg',
+    },
+    md: {
+      path: '/product-zx9-speaker/tablet/image-category-page-preview.jpg',
+    },
+    lg: {
+      path: '/product-zx9-speaker/desktop/image-category-page-preview.jpg',
+    },
+  },
+  name: 'ZX9 speaker',
+  description:
+    '  Upgrade your sound system with the all new ZX9 active speaker. It’s a bookshelf speaker system that offers truly wireless connectivity -- creating new possibilities for more pleasing and practical audio setups.',
+  newProduct: true,
+  anchor: { href: '#', label: 'See Product' },
+};
+
+const ZX7 = {
+  images: {
+    alt: '',
+    sm: {
+      path: '/product-zx7-speaker/mobile/image-category-page-preview.jpg',
+    },
+    md: {
+      path: '/product-zx7-speaker/tablet/image-category-page-preview.jpg',
+    },
+    lg: {
+      path: '/product-zx7-speaker/desktop/image-category-page-preview.jpg',
+    },
+  },
+  name: 'ZX7 speaker',
+  description:
+    '  Stream high quality sound wirelessly with minimal loss. The ZX7 bookshelf speaker uses high-end audiophile components that represents the top of the line powered speakers for home or studio use.',
+  newProduct: true,
+  anchor: { href: '#', label: 'See Product' },
+  flipped: true,
+};
+
+export const HEADPHONES_DATA: ProductPreviewCardData = [
+  XX99_ONE,
+  XX99_TWO,
+  XX59,
+];
+export const EARPHONES_DATA: ProductPreviewCardData = [YX1];
+export const SPEAKERS_DATA: ProductPreviewCardData = [ZX9, ZX7];
 
 export const CATEGORIES_DATA = [
   {
