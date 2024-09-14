@@ -1,0 +1,15 @@
+@use '@/styles/variables/font-sizes';
+
+.addToCart {
+  &__price {
+    display: block;
+    margin-bottom: 1rem;
+    font-size: font-sizes.$h6-size;
+    font-weight: font-sizes.$bold-weight;
+  }
+
+  &__addSection {
+    display: flex;
+    gap: 1rem;
+  }
+}
