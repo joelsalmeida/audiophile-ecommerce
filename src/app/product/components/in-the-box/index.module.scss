@@ -1,0 +1,42 @@
+@use '@/styles/variables/breakpoints';
+@use '@/styles/variables/font-sizes';
+@use '@/styles/variables/colors';
+
+// TODO: Review
+.inTheBox {
+  @media only screen and (min-width: breakpoints.$sm) {
+    display: flex;
+    gap: 2rem;
+
+    &__title,
+    &__description {
+      width: 50%;
+    }
+  }
+
+  @media only screen and (min-width: breakpoints.$md) {
+    display: block;
+    max-width: 21.875rem;
+  }
+
+  @media only screen and (min-width: breakpoints.$md) {
+    &__title,
+    &__description {
+      width: 100%;
+    }
+  }
+
+  &__quantity {
+    color: colors.$orange;
+    font-weight: font-sizes.$bold-weight;
+    margin-right: 1em;
+  }
+
+  &__description {
+    color: colors.$soft-gray;
+  }
+
+  li {
+    line-height: 2em;
+  }
+}
