@@ -1,0 +1,15 @@
+@use '@/styles/variables/breakpoints';
+
+// TODO: Review
+.features {
+  width: 100%;
+  margin-bottom: 2rem;
+
+  p {
+    margin-bottom: 1em;
+  }
+
+  @media only screen and (min-width: breakpoints.$lg) {
+    max-width: 39.68rem;
+  }
+}
