@@ -1,0 +1,67 @@
+@use '@/styles/variables/breakpoints';
+@use '@/styles/variables/font-sizes';
+@use '@/styles/variables/colors';
+
+.productPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  max-width: calc(1110px + 4rem);
+  width: 100%;
+  margin: 0 auto;
+
+  &__sectionsContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    @media only screen and (min-width: breakpoints.$lg) {
+      flex-direction: row;
+      gap: 7.813rem;
+    }
+  }
+
+  h2 {
+    text-transform: uppercase;
+    font-weight: font-sizes.$bold-weight;
+    font-size: font-sizes.$h5-size;
+    line-height: font-sizes.$h5-line-space;
+    letter-spacing: font-sizes.$h5-char-space;
+    margin-bottom: 1em;
+
+    @media only screen and (min-width: breakpoints.$md) {
+      font-size: 2rem;
+    }
+  }
+
+  p {
+    color: colors.$soft-gray;
+  }
+}
+
+.alsoLike {
+  margin-bottom: 6rem;
+  margin-top: 6rem;
+
+  &__title {
+    @media only screen and (min-width: breakpoints.$md) {
+      text-align: center;
+    }
+  }
+
+  &__products {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+
+    @media only screen and (min-width: breakpoints.$sm) {
+      flex-direction: row;
+    }
+
+    @media only screen and (min-width: breakpoints.$md) {
+      gap: 2rem;
+    }
+  }
+}
