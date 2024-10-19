@@ -37,7 +37,7 @@ const XX99_ONE = {
   description:
     'As the gold standard for headphones, the classic XX99 Mark I offers detailed and accurate audio reproduction for audiophiles, mixing engineers, and music aficionados alike in studios and on the go.',
   newProduct: true,
-  anchor: { href: '#', label: 'See Product' },
+  anchor: { href: '/product/XX99-one', label: 'See Product' },
 };
 
 const XX99_TWO = {
