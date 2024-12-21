@@ -1,28 +1,65 @@
+'use client';
+
 import { RadioButton } from '@/components/inputs/radio-button';
 import { TextField } from '@/components/inputs/text-field';
 import styles from './index.module.scss';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import {
+  CheckoutFormDataType,
+  checkoutFormSchema,
+} from './schemas/checkoutFormSchema';
 
 export function CheckoutForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CheckoutFormDataType>({
+    resolver: zodResolver(checkoutFormSchema),
+  });
+
+  console.log('##### ERRORS: ', errors);
+
+  const handleOnSubmit: SubmitHandler<CheckoutFormDataType> = (data) => {
+    console.log('##### DATA: ', data);
+  };
+
   return (
-    <form className={styles.checkoutForm}>
+    <form
+      className={styles.checkoutForm}
+      onSubmit={handleSubmit(handleOnSubmit)}
+    >
       <div className={styles.checkoutForm__section}>
         <h2>Billing Details</h2>
 
         <div className={styles.checkoutForm__inputContainer}>
           <label className={styles.checkoutForm__label}>
             Name
-            <TextField placeholder="John Doe" />
+            <TextField
+              {...register('name')}
+              placeholder="John Doe"
+              error={Boolean(errors.name?.message)}
+            />
           </label>
 
           <label className={styles.checkoutForm__label}>
             E-mail
-            <TextField placeholder="john.doe@mail.com" />
+            <TextField
+              {...register('email')}
+              placeholder="john.doe@mail.com"
+              error={Boolean(errors.email?.message)}
+            />
           </label>
         </div>
 
         <label className={styles.checkoutForm__label}>
           Phone Number
-          <TextField placeholder="+55 11 99876-5432" />
+          <TextField
+            {...register('phone')}
+            placeholder="+55 11 99876-5432"
+            error={Boolean(errors.phone?.message)}
+          />
         </label>
       </div>
 
@@ -31,24 +68,40 @@ export function CheckoutForm() {
 
         <label className={styles.checkoutForm__label}>
           Address
-          <TextField placeholder="1137 Williams Avenue" />
+          <TextField
+            {...register('address')}
+            placeholder="1137 Williams Avenue"
+            error={Boolean(errors.address?.message)}
+          />
         </label>
 
         <div className={styles.checkoutForm__inputContainer}>
           <label className={styles.checkoutForm__label}>
             Zip Code
-            <TextField placeholder="98987-654" />
+            <TextField
+              {...register('zipCode')}
+              placeholder="98987-654"
+              error={Boolean(errors.zipCode?.message)}
+            />
           </label>
 
           <label className={styles.checkoutForm__label}>
             City
-            <TextField placeholder="New York" />
+            <TextField
+              {...register('city')}
+              placeholder="New York"
+              error={Boolean(errors.city?.message)}
+            />
           </label>
         </div>
 
         <label className={styles.checkoutForm__label}>
           Country
-          <TextField placeholder="United States" />
+          <TextField
+            {...register('country')}
+            placeholder="United States"
+            error={Boolean(errors.country?.message)}
+          />
         </label>
       </div>
 
@@ -59,11 +112,17 @@ export function CheckoutForm() {
           <span className={styles.checkoutForm__label}>Payment Method</span>
 
           <div className={styles.checkoutForm__inputContainer__item}>
-            <RadioButton label="e-Money" name="payment-method" id="e-money" />
             <RadioButton
+              {...register('paymentMethod')}
+              label="e-Money"
+              id="e-money"
+              value="e-money"
+            />
+            <RadioButton
+              {...register('paymentMethod')}
               label="Cash on Delivery"
-              name="payment-method"
               id="cash-on-delivery"
+              value="cash-on-delivery"
             />
           </div>
         </div>
@@ -71,15 +130,25 @@ export function CheckoutForm() {
         <div className={styles.checkoutForm__inputContainer}>
           <label className={styles.checkoutForm__label}>
             e-Money Number
-            <TextField placeholder="238521993" />
+            <TextField
+              {...register('eMoneyNumber')}
+              placeholder="238521993"
+              error={Boolean(errors.eMoneyNumber?.message)}
+            />
           </label>
 
           <label className={styles.checkoutForm__label}>
             e-Money PIN
-            <TextField placeholder="6891" />
+            <TextField
+              {...register('eMoneyPin')}
+              placeholder="6891"
+              error={Boolean(errors.eMoneyPin?.message)}
+            />
           </label>
         </div>
       </div>
+
+      <button type="submit">SEND</button>
     </form>
   );
 }
