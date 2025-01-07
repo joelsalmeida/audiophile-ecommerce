@@ -1,31 +1,69 @@
 import { ProductDetails } from '@/components/product-datails';
 import styles from './page.module.scss';
-
-import { ALSO_LIKE, IN_THE_BOX, XX99_ONE } from './data';
+import { ALSO_LIKE, IN_THE_BOX } from './data';
 import { ImageGallery } from '@/components/image-gallery';
 import { ProductPreview } from '@/components/product-preview';
 import { InTheBox } from '../components/in-the-box';
 import { Features } from '../components/features';
+import { GET_PRODUCT_QUERY } from '@/lib/apollo-client/queries';
+import { query } from '@/lib/apollo-client';
+import { formatToBrCurrency } from '@/utils/format-to-br-currency';
 
 type ProductParams = {
   params: { slug: string };
 };
 
 // TODO: Make this page dynamic
-export default function ProductPage({ params }: ProductParams) {
-  console.log('product page params: ', params);
+export default async function ProductPage({ params }: ProductParams) {
+  const { data, error } = await query({
+    query: GET_PRODUCT_QUERY,
+    variables: { productId: params.slug },
+  });
+
+  console.log('##### GET_PRODUCT_QUERY data: ', data);
+  console.log('##### GET_PRODUCT_QUERY error: ', error);
+
+  const PREVIEW_IMAGE_PATHS = data.product.previewImage.paths;
+  const GALLERY_IMAGES = data.product.galleryImages;
 
   return (
     <>
-      <ProductDetails {...XX99_ONE} />
+      <ProductDetails
+        name={data.product.name}
+        description={data.product.description}
+        price={formatToBrCurrency(data.product.price)}
+        newProduct={true}
+        images={{
+          alt: '',
+          sm: { path: PREVIEW_IMAGE_PATHS.small },
+          md: { path: PREVIEW_IMAGE_PATHS.medium },
+          lg: { path: PREVIEW_IMAGE_PATHS.large },
+        }}
+      />
 
       <div className={styles.productPage__sectionsContainer}>
-        <Features features={XX99_ONE.features} />
+        <Features features={data.product.features} />
 
         <InTheBox boxItems={IN_THE_BOX} />
       </div>
 
-      <ImageGallery {...XX99_ONE.imageGallery} />
+      <ImageGallery
+        firstImage={{
+          sm: { path: GALLERY_IMAGES.imageOne.paths.small },
+          md: { path: GALLERY_IMAGES.imageOne.paths.medium },
+          lg: { path: GALLERY_IMAGES.imageOne.paths.large },
+        }}
+        secondImage={{
+          sm: { path: GALLERY_IMAGES.imageTwo.paths.small },
+          md: { path: GALLERY_IMAGES.imageTwo.paths.medium },
+          lg: { path: GALLERY_IMAGES.imageTwo.paths.large },
+        }}
+        thirdImage={{
+          sm: { path: GALLERY_IMAGES.imageThree.paths.small },
+          md: { path: GALLERY_IMAGES.imageThree.paths.medium },
+          lg: { path: GALLERY_IMAGES.imageThree.paths.large },
+        }}
+      />
 
       <div className={styles.alsoLike}>
         <h2 className={styles.alsoLike__title}>You may also like</h2>
