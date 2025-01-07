@@ -1,4 +1,3 @@
-'use client';
 import { ProductPreviewCard } from '@/components/product-preview-card';
 import styles from './page.module.scss';
 import { AboutSection } from '@/components/about-section';
@@ -6,29 +5,29 @@ import {
   CategoryCardContainer,
   CategoryCardItem,
 } from '@/components/category-card';
-
-import {
-  HEADPHONES_DATA,
-  EARPHONES_DATA,
-  SPEAKERS_DATA,
-  ProductPreviewCardData,
-} from './data';
+import { query } from '@/lib/apollo-client';
+import { GET_PRODUCTS_BY_CATEGORY_QUERY } from '@/lib/apollo-client/queries';
 import { CATEGORIES_DATA } from './data';
+import { ProductType } from './types';
 
 type CategoryParams = {
   params: { slug: 'headphones' | 'earphones' | 'speakers' };
 };
 
 // TODO: Review this page
-export default function CategoryPage({ params }: CategoryParams) {
-  const DATA_MAPPER: Record<
-    CategoryParams['params']['slug'],
-    ProductPreviewCardData
-  > = {
-    headphones: HEADPHONES_DATA,
-    earphones: EARPHONES_DATA,
-    speakers: SPEAKERS_DATA,
-  };
+export default async function CategoryPage({ params }: CategoryParams) {
+  const { data, error } = await query({
+    query: GET_PRODUCTS_BY_CATEGORY_QUERY,
+    variables: {
+      category: 'HEADPHONES', // TODO: Fix this arg
+      paginationArgs: { limit: 10, skip: 0 },
+    },
+  });
+
+  console.log('##### GET_PRODUCT_QUERY data: ', data);
+  console.log('##### GET_PRODUCT_QUERY error: ', error);
+
+  const PRODUCTS_DATA = data.productsByCategory.products;
 
   return (
     <>
@@ -36,8 +35,30 @@ export default function CategoryPage({ params }: CategoryParams) {
 
       <main className={styles.categoryPage}>
         {params.slug &&
-          DATA_MAPPER[params.slug].map((product) => (
-            <ProductPreviewCard {...product} key={product.name} />
+          PRODUCTS_DATA.map((product: ProductType, index: number) => (
+            <ProductPreviewCard
+              name={product.name}
+              description={product.description[0]}
+              images={{
+                alt: '',
+                sm: {
+                  path: product.previewImage.paths.small,
+                },
+                md: {
+                  path: product.previewImage.paths.medium,
+                },
+                lg: {
+                  path: product.previewImage.paths.large,
+                },
+              }}
+              anchor={{
+                href: `/product/${product._id}`,
+                label: 'See product',
+              }}
+              flipped={index % 2 !== 0}
+              newProduct={true}
+              key={product.slug}
+            />
           ))}
 
         <CategoryCardContainer>
