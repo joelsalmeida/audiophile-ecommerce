@@ -16,10 +16,12 @@ type CategoryParams = {
 
 // TODO: Review this page
 export default async function CategoryPage({ params }: CategoryParams) {
+  const SLUG_UPPERCASE = params.slug.toUpperCase();
+
   const { data, error } = await query({
     query: GET_PRODUCTS_BY_CATEGORY_QUERY,
     variables: {
-      category: 'HEADPHONES', // TODO: Fix this arg
+      category: SLUG_UPPERCASE,
       paginationArgs: { limit: 10, skip: 0 },
     },
   });
