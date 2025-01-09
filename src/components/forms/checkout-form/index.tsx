@@ -9,17 +9,36 @@ import {
   CheckoutFormDataType,
   checkoutFormSchema,
 } from './schemas/checkoutFormSchema';
+import { useGetZipCodeData } from '@/custom-hooks';
 
 export function CheckoutForm() {
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm<CheckoutFormDataType>({
     resolver: zodResolver(checkoutFormSchema),
   });
 
   console.log('##### ERRORS: ', errors);
+
+  const ZIP_CODE = watch('zipCode');
+
+  const {
+    data: zipCodeData,
+    isLoading,
+    error,
+  } = useGetZipCodeData(Number(ZIP_CODE));
+
+  if (zipCodeData) {
+    setValue('address', zipCodeData.street);
+    setValue('city', zipCodeData.city);
+    setValue('country', 'Brazil');
+  }
+
+  console.log('##### CheckoutForm ZIP CODE: ', zipCodeData, isLoading, error);
 
   const handleOnSubmit: SubmitHandler<CheckoutFormDataType> = (data) => {
     console.log('##### DATA: ', data);
