@@ -21,6 +21,7 @@ export const GET_PRODUCTS_BY_CATEGORY_QUERY = gql`
           }
         }
         slug
+        releaseDate
       }
     }
   }

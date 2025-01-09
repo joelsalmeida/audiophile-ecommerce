@@ -16,4 +16,5 @@ export type ProductType = {
   price: number;
   previewImage: PreviewImageType;
   slug: string;
+  releaseDate: string;
 };

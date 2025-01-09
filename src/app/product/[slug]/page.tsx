@@ -7,7 +7,7 @@ import { InTheBox } from '../components/in-the-box';
 import { Features } from '../components/features';
 import { GET_PRODUCT_QUERY } from '@/lib/apollo-client/queries';
 import { query } from '@/lib/apollo-client';
-import { formatToBrCurrency } from '@/utils/format-to-br-currency';
+import { formatToBrCurrency, getDifferenceBetweenDatesInDays } from '@/utils';
 
 type ProductParams = {
   params: { slug: string };
@@ -26,13 +26,20 @@ export default async function ProductPage({ params }: ProductParams) {
   const PREVIEW_IMAGE_PATHS = data.product.previewImage.paths;
   const GALLERY_IMAGES = data.product.galleryImages;
 
+  // TODO: DRY
+  const releaseDateInside90Days =
+    getDifferenceBetweenDatesInDays(
+      new Date(data.product.releaseDate),
+      new Date(),
+    ) <= 90;
+
   return (
     <>
       <ProductDetails
         name={data.product.name}
         description={data.product.description}
         price={formatToBrCurrency(data.product.price)}
-        newProduct={true}
+        newProduct={releaseDateInside90Days}
         images={{
           alt: '',
           sm: { path: PREVIEW_IMAGE_PATHS.small },

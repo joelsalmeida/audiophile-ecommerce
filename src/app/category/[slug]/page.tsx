@@ -9,6 +9,7 @@ import { query } from '@/lib/apollo-client';
 import { GET_PRODUCTS_BY_CATEGORY_QUERY } from '@/lib/apollo-client/queries';
 import { CATEGORIES_DATA } from './data';
 import { ProductType } from './types';
+import { getDifferenceBetweenDatesInDays } from '@/utils';
 
 type CategoryParams = {
   params: { slug: 'headphones' | 'earphones' | 'speakers' };
@@ -37,31 +38,39 @@ export default async function CategoryPage({ params }: CategoryParams) {
 
       <main className={styles.categoryPage}>
         {params.slug &&
-          PRODUCTS_DATA.map((product: ProductType, index: number) => (
-            <ProductPreviewCard
-              name={product.name}
-              description={product.description[0]}
-              images={{
-                alt: '',
-                sm: {
-                  path: product.previewImage.paths.small,
-                },
-                md: {
-                  path: product.previewImage.paths.medium,
-                },
-                lg: {
-                  path: product.previewImage.paths.large,
-                },
-              }}
-              anchor={{
-                href: `/product/${product._id}`,
-                label: 'See product',
-              }}
-              flipped={index % 2 !== 0}
-              newProduct={true}
-              key={product.slug}
-            />
-          ))}
+          PRODUCTS_DATA.map((product: ProductType, index: number) => {
+            const releaseDateInside90Days =
+              getDifferenceBetweenDatesInDays(
+                new Date(product.releaseDate),
+                new Date(),
+              ) <= 90;
+
+            return (
+              <ProductPreviewCard
+                name={product.name}
+                description={product.description[0]}
+                images={{
+                  alt: '',
+                  sm: {
+                    path: product.previewImage.paths.small,
+                  },
+                  md: {
+                    path: product.previewImage.paths.medium,
+                  },
+                  lg: {
+                    path: product.previewImage.paths.large,
+                  },
+                }}
+                anchor={{
+                  href: `/product/${product._id}`,
+                  label: 'See product',
+                }}
+                flipped={index % 2 !== 0}
+                newProduct={releaseDateInside90Days}
+                key={product.slug}
+              />
+            );
+          })}
 
         <CategoryCardContainer>
           {CATEGORIES_DATA.map((category) => (
