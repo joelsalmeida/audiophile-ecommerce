@@ -6,11 +6,11 @@ export const checkoutFormSchema = z.object({
   // BILLING
   name: z.string().min(3),
   email: z.string().email(),
-  phone: z.string().length(13),
+  phone: z.string().length(15),
 
   // SHIPPING
   address: z.string().min(1),
-  zipCode: z.string().length(8),
+  zipCode: z.string().length(9),
   city: z.string().min(1),
   country: z.string().min(1),
 

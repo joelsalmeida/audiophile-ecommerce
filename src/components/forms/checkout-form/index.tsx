@@ -3,13 +3,14 @@
 import { RadioButton } from '@/components/inputs/radio-button';
 import { TextField } from '@/components/inputs/text-field';
 import styles from './index.module.scss';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   CheckoutFormDataType,
   checkoutFormSchema,
 } from './schemas/checkoutFormSchema';
 import { useGetZipCodeData } from '@/custom-hooks';
+import { maskPhoneNumber, maskZipCode } from '@/utils';
 
 export function CheckoutForm() {
   const {
@@ -17,6 +18,7 @@ export function CheckoutForm() {
     handleSubmit,
     watch,
     setValue,
+    control,
     formState: { errors },
   } = useForm<CheckoutFormDataType>({
     resolver: zodResolver(checkoutFormSchema),
@@ -30,7 +32,7 @@ export function CheckoutForm() {
     data: zipCodeData,
     isLoading,
     error,
-  } = useGetZipCodeData(Number(ZIP_CODE));
+  } = useGetZipCodeData(Number(ZIP_CODE?.replace('-', '')));
 
   if (zipCodeData) {
     setValue('address', zipCodeData.street);
@@ -74,10 +76,17 @@ export function CheckoutForm() {
 
         <label className={styles.checkoutForm__label}>
           Phone Number
-          <TextField
-            {...register('phone')}
-            placeholder="+55 11 99876-5432"
-            error={Boolean(errors.phone?.message)}
+          <Controller
+            name="phone"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                inputMask={maskPhoneNumber}
+                placeholder="(11) 98765-4321"
+                error={Boolean(errors.phone?.message)}
+              />
+            )}
           />
         </label>
       </div>
@@ -97,10 +106,17 @@ export function CheckoutForm() {
         <div className={styles.checkoutForm__inputContainer}>
           <label className={styles.checkoutForm__label}>
             Zip Code
-            <TextField
-              {...register('zipCode')}
-              placeholder="98987-654"
-              error={Boolean(errors.zipCode?.message)}
+            <Controller
+              name="zipCode"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  inputMask={maskZipCode}
+                  placeholder="98987-654"
+                  error={Boolean(errors.zipCode?.message)}
+                />
+              )}
             />
           </label>
 
