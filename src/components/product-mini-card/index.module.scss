@@ -1,0 +1,25 @@
+@use '@/styles/variables/font-sizes';
+
+.productMiniCard {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+
+  &__image {
+    border-radius: 8px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+
+    &__name {
+      font-weight: font-sizes.$bold-weight;
+    }
+
+    &__price {
+      font-weight: font-sizes.$bold-weight;
+      opacity: 0.5;
+    }
+  }
+}
