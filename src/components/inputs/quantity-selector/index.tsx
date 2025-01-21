@@ -1,36 +1,15 @@
 'use client';
-import { useState } from 'react';
 import styles from './index.module.scss';
 import { QuantitySelectorProps } from './index.types';
 
 export function QuantitySelector({
-  disabled,
   maxQuantity = 99,
+  increment,
+  decrement,
+  currentQuantity,
   ...restProps
 }: QuantitySelectorProps) {
-  const [value, setValue] = useState(0);
-
-  function increment() {
-    setValue((prevValue) => prevValue + 1);
-  }
-
-  function decrement() {
-    setValue((prevValue) => prevValue - 1);
-  }
-
-  function handleChange({ target }: React.ChangeEvent<HTMLInputElement>) {
-    const newValue = Number(target.value);
-
-    const IS_NUMBER = typeof newValue === 'number';
-    const IS_QUANTITY_WITHIN_LIMIT = newValue <= maxQuantity && newValue >= 0;
-    const SHOULD_UPDATE_VALUE = IS_NUMBER && IS_QUANTITY_WITHIN_LIMIT;
-
-    if (!SHOULD_UPDATE_VALUE) return;
-
-    setValue(newValue);
-  }
-
-  const MAX_QUANTITY_REACHED = value === maxQuantity;
+  const MAX_QUANTITY_REACHED = currentQuantity === maxQuantity;
 
   return (
     <div className={styles.quantitySelector}>
@@ -38,7 +17,7 @@ export function QuantitySelector({
         className={styles.quantitySelector__button}
         type="button"
         onClick={decrement}
-        disabled={value === 0}
+        disabled={currentQuantity === 0}
       >
         -
       </button>
@@ -47,8 +26,8 @@ export function QuantitySelector({
         className={styles.quantitySelector__input}
         type="text"
         {...restProps}
-        value={value}
-        onChange={handleChange}
+        value={currentQuantity}
+        readOnly
       />
 
       <button
