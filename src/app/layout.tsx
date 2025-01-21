@@ -3,6 +3,7 @@ import { Manrope } from 'next/font/google';
 import '@/styles/global.scss';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
+import { ApolloWrapper } from '@/lib/apollo-client/apollo-wrapper';
 
 const manrope = Manrope({ subsets: ['latin'] });
 
@@ -20,9 +21,11 @@ export default function RootLayout({
     <>
       <html lang="en">
         <body className={manrope.className}>
-          <Header />
-          {children}
-          <Footer />
+          <ApolloWrapper>
+            <Header />
+            {children}
+            <Footer />
+          </ApolloWrapper>
         </body>
       </html>
     </>
