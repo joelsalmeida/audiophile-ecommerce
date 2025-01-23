@@ -36,6 +36,7 @@ export default async function ProductPage({ params }: ProductParams) {
   return (
     <>
       <ProductDetails
+        id={data.product._id}
         name={data.product.name}
         description={data.product.description}
         price={formatToBrCurrency(data.product.price)}
