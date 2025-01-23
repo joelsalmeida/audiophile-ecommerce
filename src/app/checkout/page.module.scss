@@ -1,0 +1,22 @@
+@use '@/styles/variables/breakpoints';
+@use '@/styles/variables/colors';
+
+.checkoutPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: calc(1110px + 4rem);
+  width: 100%;
+  margin: 0 auto;
+
+  @media only screen and (min-width: breakpoints.$lg) {
+    flex-direction: row;
+  }
+}
+
+.checkoutPageBackground {
+  background-color: colors.$light-gray;
+}
