@@ -1,4 +1,4 @@
 export type AddToCartProps = {
   price: string;
-  onClickHandler: () => void;
+  productId: string;
 };
