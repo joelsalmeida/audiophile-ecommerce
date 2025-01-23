@@ -4,6 +4,7 @@ import styles from './index.module.scss';
 import { ProductDetailsProps } from './index.types';
 
 export function ProductDetails({
+  id,
   name,
   description,
   price,
@@ -37,10 +38,7 @@ export function ProductDetails({
           </p>
         </div>
 
-        <AddToCart
-          price={price}
-          onClickHandler={() => console.log('Product added :)')}
-        />
+        <AddToCart productId={id} price={price} />
       </div>
     </section>
   );
