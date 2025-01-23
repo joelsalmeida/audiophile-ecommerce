@@ -48,6 +48,7 @@ export function CheckoutForm() {
 
   return (
     <form
+      id="checkout-form"
       className={styles.checkoutForm}
       onSubmit={handleSubmit(handleOnSubmit)}
     >

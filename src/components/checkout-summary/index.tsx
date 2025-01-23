@@ -12,10 +12,10 @@ export function CheckoutSummary({
   const { VAT, grandTotal, shipping, total } = totalCost;
 
   const SUMMARY_PRICES = [
+    { description: 'Total', value: total },
+    { description: 'Shipping', value: shipping },
     { description: 'VAT (included)', value: VAT },
     { description: 'Grand total', value: grandTotal },
-    { description: 'Shipping', value: shipping },
-    { description: 'Total', value: total },
   ];
 
   return (
@@ -56,7 +56,12 @@ export function CheckoutSummary({
         ))}
       </div>
 
-      <Button variant="contained" fullWidth={true}>
+      <Button
+        variant="contained"
+        fullWidth={true}
+        type="submit"
+        form="checkout-form"
+      >
         Continue & Pay
       </Button>
     </div>
