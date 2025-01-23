@@ -52,6 +52,10 @@ export function CheckoutForm() {
       onSubmit={handleSubmit(handleOnSubmit)}
     >
       <div className={styles.checkoutForm__section}>
+        <strong className={styles.checkoutForm__section__title}>
+          Checkout
+        </strong>
+
         <h2>Billing Details</h2>
 
         <div className={styles.checkoutForm__inputContainer}>
@@ -182,8 +186,6 @@ export function CheckoutForm() {
           </label>
         </div>
       </div>
-
-      <button type="submit">SEND</button>
     </form>
   );
 }
