@@ -31,7 +31,6 @@ export function CheckoutSummary({
             <ProductMiniCard
               name={item.name}
               price={formatToBrCurrency(item.price)}
-              quantity={item.quantity}
               image={{ path: item.imagePath }}
             />
 
