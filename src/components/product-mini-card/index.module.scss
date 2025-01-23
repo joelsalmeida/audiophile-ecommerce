@@ -6,7 +6,11 @@
   align-items: center;
 
   &__image {
+    position: relative;
     border-radius: 8px;
+    width: 64px;
+    height: 64px;
+    overflow: hidden;
   }
 
   &__content {

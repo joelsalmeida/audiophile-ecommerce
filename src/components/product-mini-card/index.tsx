@@ -10,13 +10,15 @@ export function ProductMiniCard({
 }: ProductMiniCardProps) {
   return (
     <div className={styles.productMiniCard}>
-      <Image
-        className={styles.productMiniCard__image}
-        src={path}
-        width={64}
-        height={64}
-        alt={alt}
-      />
+      <div className={styles.productMiniCard__image}>
+        <Image
+          src={path}
+          fill
+          sizes="64px"
+          style={{ objectFit: 'cover' }}
+          alt={alt}
+        />
+      </div>
 
       <div className={styles.productMiniCard__content}>
         <span className={styles.productMiniCard__content__name}>{name}</span>
