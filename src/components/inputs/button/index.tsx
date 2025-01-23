@@ -11,6 +11,7 @@ export function Button({
   children,
   variant,
   asLink,
+  fullWidth = false,
   ...restProps
 }: ButtonProps) {
   if (asLink) {
@@ -21,6 +22,7 @@ export function Button({
         href={href}
         className={styles.button}
         data-variant={variant}
+        data-full-width={fullWidth}
         {...linkProps}
       >
         {children}
@@ -42,6 +44,7 @@ export function Button({
     <button
       className={styles.button}
       data-variant={variant}
+      data-full-width={fullWidth}
       {...(restProps as ButtonAsButtonProps)}
     >
       {children}

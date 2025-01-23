@@ -3,6 +3,7 @@ import { LinkProps } from 'next/link';
 
 export type ButtonBaseProps = {
   variant: 'text' | 'contained' | 'outlined';
+  fullWidth?: boolean;
   children: ReactNode;
 };
 
