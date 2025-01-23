@@ -1,0 +1,26 @@
+@use '@/styles/variables/font-sizes';
+@use '@/styles/variables/colors';
+
+.checkoutSummaryPrice {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  line-height: 1;
+
+  &:last-child {
+    padding-top: 1rem;
+
+    strong {
+      color: colors.$orange;
+    }
+  }
+
+  &__description {
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+
+  &__value {
+    font-weight: font-sizes.$bold-weight;
+  }
+}
