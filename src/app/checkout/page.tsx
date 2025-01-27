@@ -1,26 +1,23 @@
+'use client';
 import { CheckoutForm } from '@/components/forms/checkout-form';
 import styles from './page.module.scss';
 import { CheckoutSummary } from '@/components/checkout-summary';
 import { GET_CART_QUERY } from '@/lib/apollo-client/queries';
-import { query } from '@/lib/apollo-client';
+import { useQuery } from '@apollo/client';
+import { TOTAL_COST_FALLBACK } from '@/utils/fallback-props';
 
-export default async function CheckoutPage() {
-  const { data, error } = await query({
-    query: GET_CART_QUERY,
-  });
+export default function CheckoutPage() {
+  const { data } = useQuery(GET_CART_QUERY);
 
-  console.log('CheckoutPage data: ', data);
-  console.log('CheckoutPage error: ', error);
+  const cartItems = data?.getCart?.cartItems ?? [];
+  const totalCost = data?.getCart?.totalCost ?? TOTAL_COST_FALLBACK;
 
   return (
     <div className={styles.checkoutPageBackground}>
       <div className={styles.checkoutPage}>
         <CheckoutForm />
 
-        <CheckoutSummary
-          cartItems={data.getCart.cartItems}
-          totalCost={data.getCart.totalCost}
-        />
+        <CheckoutSummary cartItems={cartItems} totalCost={totalCost} />
       </div>
     </div>
   );
