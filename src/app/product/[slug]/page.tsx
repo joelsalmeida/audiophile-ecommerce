@@ -15,13 +15,10 @@ type ProductParams = {
 
 // TODO: Make this page dynamic
 export default async function ProductPage({ params }: ProductParams) {
-  const { data, error } = await query({
+  const { data } = await query({
     query: GET_PRODUCT_QUERY,
     variables: { productId: params.slug },
   });
-
-  console.log('##### GET_PRODUCT_QUERY data: ', data);
-  console.log('##### GET_PRODUCT_QUERY error: ', error);
 
   const PREVIEW_IMAGE_PATHS = data.product.previewImage.paths;
   const GALLERY_IMAGES = data.product.galleryImages;
@@ -38,7 +35,7 @@ export default async function ProductPage({ params }: ProductParams) {
       <ProductDetails
         id={data.product._id}
         name={data.product.name}
-        description={data.product.description}
+        description={data.product.description[0]}
         price={formatToBrCurrency(data.product.price)}
         newProduct={releaseDateInside90Days}
         images={{
