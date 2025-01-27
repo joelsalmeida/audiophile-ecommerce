@@ -1,6 +1,6 @@
-import { gql } from '@apollo/client';
+import { gql } from '../__generated__';
 
-export const GET_PRODUCTS_BY_CATEGORY_QUERY = gql`
+export const GET_PRODUCTS_BY_CATEGORY_QUERY = gql(`
   query ProductsByCategory(
     $category: Category!
     $paginationArgs: PaginationArgs!
@@ -25,4 +25,4 @@ export const GET_PRODUCTS_BY_CATEGORY_QUERY = gql`
       }
     }
   }
-`;
+`);

@@ -1,6 +1,6 @@
-import { gql } from '@apollo/client';
+import { gql } from '../__generated__';
 
-export const GET_PRODUCT_QUERY = gql`
+export const GET_PRODUCT_QUERY = gql(`
   query GetProduct($productId: String!) {
     product(id: $productId) {
       _id
@@ -47,4 +47,4 @@ export const GET_PRODUCT_QUERY = gql`
       releaseDate
     }
   }
-`;
+`);

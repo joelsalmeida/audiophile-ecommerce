@@ -1,6 +1,6 @@
-import { gql } from '@apollo/client';
+import { gql } from '../__generated__';
 
-export const GET_CART_QUERY = gql`
+export const GET_CART_QUERY = gql(`
   query GetCart {
     getCart {
       cartItems {
@@ -18,4 +18,4 @@ export const GET_CART_QUERY = gql`
       }
     }
   }
-`;
+`);
