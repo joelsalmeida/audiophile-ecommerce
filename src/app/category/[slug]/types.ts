@@ -5,7 +5,7 @@ type ImagePathsType = {
 };
 
 type PreviewImageType = {
-  alt: string | null;
+  alt?: string;
   paths: ImagePathsType;
 };
 

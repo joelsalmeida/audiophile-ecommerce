@@ -8,8 +8,8 @@ import {
 import { query } from '@/lib/apollo-client';
 import { GET_PRODUCTS_BY_CATEGORY_QUERY } from '@/lib/apollo-client/queries';
 import { CATEGORIES_DATA } from './data';
-import { ProductType } from './types';
 import { getDifferenceBetweenDatesInDays } from '@/utils';
+import { Category } from '@/lib/apollo-client/__generated__/graphql';
 
 type CategoryParams = {
   params: { slug: 'headphones' | 'earphones' | 'speakers' };
@@ -19,16 +19,13 @@ type CategoryParams = {
 export default async function CategoryPage({ params }: CategoryParams) {
   const SLUG_UPPERCASE = params.slug.toUpperCase();
 
-  const { data, error } = await query({
+  const { data } = await query({
     query: GET_PRODUCTS_BY_CATEGORY_QUERY,
     variables: {
-      category: SLUG_UPPERCASE,
+      category: SLUG_UPPERCASE as Category,
       paginationArgs: { limit: 10, skip: 0 },
     },
   });
-
-  console.log('##### GET_PRODUCT_QUERY data: ', data);
-  console.log('##### GET_PRODUCT_QUERY error: ', error);
 
   const PRODUCTS_DATA = data.productsByCategory.products;
 
@@ -38,7 +35,7 @@ export default async function CategoryPage({ params }: CategoryParams) {
 
       <main className={styles.categoryPage}>
         {params.slug &&
-          PRODUCTS_DATA.map((product: ProductType, index: number) => {
+          PRODUCTS_DATA.map((product, index: number) => {
             const releaseDateInside90Days =
               getDifferenceBetweenDatesInDays(
                 new Date(product.releaseDate),
