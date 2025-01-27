@@ -6,11 +6,15 @@ import { AddToCartProps } from './index.types';
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_TO_CART_MUTATION } from '@/lib/apollo-client/mutations';
+import { GET_CART_QUERY } from '@/lib/apollo-client/queries';
 
 // TODO: Improve on click handler logic
 export function AddToCart({ productId, price }: AddToCartProps) {
   const [quantity, setQuantity] = useState(1);
-  const [addToCartMutation] = useMutation(ADD_TO_CART_MUTATION);
+
+  const [addToCartMutation] = useMutation(ADD_TO_CART_MUTATION, {
+    refetchQueries: [GET_CART_QUERY],
+  });
 
   function increment() {
     setQuantity((prevValue) => prevValue + 1);
