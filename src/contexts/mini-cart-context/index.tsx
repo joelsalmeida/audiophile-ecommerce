@@ -5,7 +5,7 @@ import {
 } from './index.types';
 
 const DEFAULT_MINI_CART_CONTEXT: MiniCartContextType = {
-  isOpen: false,
+  isMiniCartOpen: false,
   openMiniCart: () => console.warn('openMiniCart called outside provider.'),
   closeMiniCart: () => console.warn('closeMiniCart called outside provider.'),
   toggleMiniCart: () => console.warn('toggleMiniCart called outside provider.'),
@@ -24,7 +24,7 @@ function MiniCartContextProvider({ children }: MiniCartContextProviderProps) {
 
   const contextValue = useMemo(
     () => ({
-      isOpen: miniCartIsOpen,
+      isMiniCartOpen: miniCartIsOpen,
       openMiniCart,
       closeMiniCart,
       toggleMiniCart,

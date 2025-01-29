@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 export type MiniCartContextType = {
-  isOpen: boolean;
+  isMiniCartOpen: boolean;
   openMiniCart: () => void;
   closeMiniCart: () => void;
   toggleMiniCart: () => void;
