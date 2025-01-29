@@ -13,6 +13,7 @@
 }
 
 .header {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -99,6 +100,7 @@
   }
 
   &__cartButton {
+    position: relative;
     width: 3rem;
     height: 3rem;
     display: flex;

@@ -3,23 +3,30 @@ import { useClickOutside } from '@/custom-hooks';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { LINKS_DATA } from './helpers/links-data';
 import styles from './index.module.scss';
 import { renderLinksProp } from './index.types';
+import { MiniCart } from '../mini-cart';
+import { useQuery } from '@apollo/client';
+import { GET_CART_QUERY } from '@/lib/apollo-client/queries';
+import { useMiniCartContext } from '@/contexts/mini-cart-context';
+import { getFirstWord } from '@/utils';
 
 export function Header() {
-  const [openMobileMenu, setOpenMobileMenu] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
+  const toggleMobileMenu = () => setIsMobileMenuOpen((prevState) => !prevState);
+
+  const { isMiniCartOpen, openMiniCart, closeMiniCart } = useMiniCartContext();
+  const { data } = useQuery(GET_CART_QUERY);
+
   const NAV_REF = useRef(null);
   const HAMBURGER_REF = useRef(null);
 
-  function toggleMobileMenu() {
-    setOpenMobileMenu((prevState) => !prevState);
-  }
+  useClickOutside(NAV_REF, () => setIsMobileMenuOpen(false), [HAMBURGER_REF]);
 
-  useClickOutside(NAV_REF, () => setOpenMobileMenu(false), [HAMBURGER_REF]);
-
-  const CURRENT_PATCH = usePathname();
+  const CURRENT_PATH = usePathname();
 
   function renderLinks(links: renderLinksProp) {
     return links.map(({ href, label }) => (
@@ -27,13 +34,22 @@ export function Header() {
         className={styles.header__nav__link}
         href={href}
         key={href}
-        data-active={CURRENT_PATCH === href}
-        onClick={() => setOpenMobileMenu(false)}
+        data-active={CURRENT_PATH === href}
+        onClick={() => setIsMobileMenuOpen(false)}
       >
         {label}
       </Link>
     ));
   }
+
+  const CART_ITEMS = useMemo(() => {
+    const cartItems = data?.getCart?.cartItems ?? [];
+
+    return cartItems.map((item) => ({
+      ...item,
+      name: getFirstWord(item.name),
+    }));
+  }, [data?.getCart?.cartItems]);
 
   return (
     <header className={styles.header__container}>
@@ -41,7 +57,7 @@ export function Header() {
         <div
           ref={HAMBURGER_REF}
           className={styles.header__hamburger}
-          data-mobile-menu-open={openMobileMenu}
+          data-mobile-menu-open={isMobileMenuOpen}
           onClick={toggleMobileMenu}
         >
           <span />
@@ -55,25 +71,32 @@ export function Header() {
             alt="Audiophile logo"
             width={143}
             height={25}
-            onClick={() => setOpenMobileMenu(false)}
+            onClick={closeMobileMenu}
           />
         </Link>
 
         <nav
           ref={NAV_REF}
           className={styles.header__nav}
-          data-mobile-menu-open={openMobileMenu}
+          data-mobile-menu-open={isMobileMenuOpen}
         >
           {renderLinks(LINKS_DATA)}
         </nav>
 
         <button
+          id="mini-cart-switcher-button"
           className={styles.header__cartButton}
           type="button"
-          onClick={() => console.log('Open cart')}
+          onMouseDown={openMiniCart}
         >
           <Image src="/cart-icon.svg" alt="Open cart" width={23} height={20} />
         </button>
+
+        <MiniCart
+          cartItems={CART_ITEMS}
+          open={isMiniCartOpen}
+          onClose={closeMiniCart}
+        />
       </div>
     </header>
   );
