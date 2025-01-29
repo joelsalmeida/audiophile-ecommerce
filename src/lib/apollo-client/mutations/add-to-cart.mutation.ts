@@ -1,7 +1,7 @@
 import { gql } from '../__generated__';
 
 export const ADD_TO_CART_MUTATION = gql(`
-  mutation Mutation($addToCartInput: AddItemToCartInput!) {
+  mutation AddToCartMutation($addToCartInput: AddItemToCartInput!) {
     addToCart(addToCartInput: $addToCartInput) {
       cartItems {
         id
