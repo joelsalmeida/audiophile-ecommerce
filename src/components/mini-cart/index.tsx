@@ -5,6 +5,7 @@ import { MiniCartProps } from './index.types';
 import { QuantitySelector } from '../inputs/quantity-selector';
 import {
   ADD_TO_CART_MUTATION,
+  CLEAR_CART_MUTATION,
   REMOVE_ITEM_FROM_CART_MUTATION,
 } from '@/lib/apollo-client/mutations';
 import { GET_CART_QUERY } from '@/lib/apollo-client/queries';
@@ -26,6 +27,10 @@ export function MiniCart({ cartItems, open = false, onClose }: MiniCartProps) {
       refetchQueries: [GET_CART_QUERY],
     },
   );
+
+  const [clearCartMutation] = useMutation(CLEAR_CART_MUTATION, {
+    refetchQueries: [GET_CART_QUERY],
+  });
 
   const addToCartHandler = (id: string, quantity: number) => {
     const addToCartInput = {
@@ -49,7 +54,7 @@ export function MiniCart({ cartItems, open = false, onClose }: MiniCartProps) {
   };
 
   const removeAllItemsHandler = () => {
-    console.warn('Needs to be implemented.');
+    clearCartMutation();
   };
 
   const CART_ITEMS_TOTAL = useMemo(
