@@ -1,0 +1,61 @@
+@use '@/styles/variables/colors';
+@use '@/styles/variables/font-sizes';
+@use '@/styles/variables/breakpoints';
+
+.cartResume {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: colors.$light-gray;
+
+  @media only screen and (min-width: breakpoints.$sm) {
+    flex-direction: row;
+  }
+
+  &__items {
+    padding: 1.5rem;
+
+    &__item {
+      border-bottom: 1px solid colors.$soft-gray;
+      display: flex;
+      justify-content: space-between;
+
+      &__quantity {
+        margin-top: 6px;
+        font-weight: font-sizes.$bold-weight;
+        color: rgba(colors.$black, 0.5);
+      }
+    }
+
+    &__quantity {
+      display: flex;
+      justify-content: center;
+      color: rgba(colors.$black, 0.5);
+      padding-top: 1rem;
+      font-size: font-sizes.$overline-size;
+      font-weight: font-sizes.$bold-weight;
+    }
+  }
+
+  &__total {
+    padding: 1.5rem;
+    background-color: colors.$soft-black;
+
+    @media only screen and (min-width: breakpoints.$sm) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    &__description {
+      color: colors.$soft-gray;
+      text-transform: uppercase;
+    }
+
+    &__value {
+      color: colors.$white;
+      font-weight: font-sizes.$bold-weight;
+    }
+  }
+}
