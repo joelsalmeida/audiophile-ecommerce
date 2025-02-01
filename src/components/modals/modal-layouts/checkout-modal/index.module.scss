@@ -1,0 +1,30 @@
+@use '@/styles/variables/colors';
+@use '@/styles/variables/font-sizes';
+@use '@/styles/variables/breakpoints';
+
+.checkoutModal {
+  max-width: 540px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem;
+  background-color: colors.$white;
+  border-radius: 8px;
+  margin: 1.5rem;
+
+  &__title {
+    font-weight: font-sizes.$bold-weight;
+    font-size: 24px;
+    letter-spacing: 0.86px;
+    line-height: font-sizes.$h5-line-space;
+    text-wrap: balance;
+
+    @media only screen and (min-width: breakpoints.$sm) {
+      font-size: font-sizes.$h3-size;
+    }
+  }
+
+  &__description {
+    color: rgba(colors.$black, 0.5);
+  }
+}

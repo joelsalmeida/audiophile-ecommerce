@@ -1,0 +1,16 @@
+@use '@/styles/variables/colors';
+
+.modalBackdrop {
+  z-index: 800;
+  position: fixed;
+  inset: 0;
+  top: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(colors.$black, 0.5);
+
+  &[data-open='false'] {
+    display: none;
+  }
+}
