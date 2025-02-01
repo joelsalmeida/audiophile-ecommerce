@@ -6,6 +6,8 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { ApolloWrapper } from '@/lib/apollo-client/apollo-wrapper';
 import { MiniCartContextProvider } from '@/contexts/mini-cart-context';
+import { ModalBackdrop } from '@/components/modals';
+import { ModalBaseContextProvider } from '@/contexts/modal-base-context';
 
 const manrope = Manrope({ subsets: ['latin'] });
 
@@ -28,7 +30,12 @@ export default function RootLayout({
               <Header />
             </MiniCartContextProvider>
 
-            {children}
+            <ModalBaseContextProvider>
+              <ModalBackdrop />
+
+              {children}
+            </ModalBaseContextProvider>
+
             <Footer />
           </ApolloWrapper>
         </body>
