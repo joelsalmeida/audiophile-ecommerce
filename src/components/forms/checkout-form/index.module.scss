@@ -60,4 +60,21 @@
       margin-bottom: 1rem;
     }
   }
+
+  &__paymentInfo {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    color: rgba(colors.$black, 0.5);
+    flex-direction: column;
+
+    @media only screen and (min-width: breakpoints.$sm) {
+      gap: 2rem;
+      flex-direction: row;
+    }
+
+    p {
+      max-width: 34rem;
+    }
+  }
 }

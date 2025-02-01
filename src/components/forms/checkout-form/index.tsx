@@ -14,6 +14,7 @@ import { maskPhoneNumber, maskZipCode } from '@/utils';
 import { useModalBaseActions } from '@/contexts/modal-base-context';
 import { CheckoutModal } from '@/components/modals';
 import { useEffect } from 'react';
+import Image from 'next/image';
 
 export function CheckoutForm() {
   const {
@@ -35,7 +36,7 @@ export function CheckoutForm() {
 
   console.log('##### ERRORS: ', errors);
 
-  const ZIP_CODE = watch('zipCode');
+  const [ZIP_CODE, PAYMENT_METHOD] = watch(['zipCode', 'paymentMethod']);
 
   const {
     data: zipCodeData,
@@ -72,6 +73,8 @@ export function CheckoutForm() {
   useEffect(() => {
     if (isSubmitSuccessful) reset();
   }, [isSubmitSuccessful, reset]);
+
+  const IS_CASH_ON_DELIVERY = PAYMENT_METHOD === 'cash-on-delivery';
 
   return (
     <form
@@ -223,6 +226,23 @@ export function CheckoutForm() {
           </label>
         </div>
       </div>
+
+      {IS_CASH_ON_DELIVERY && (
+        <div className={styles.checkoutForm__paymentInfo}>
+          <Image
+            src="/checkout/icon-cash-on-delivery.svg"
+            alt=""
+            width={48}
+            height={48}
+          />
+
+          <p>
+            The ‘Cash on Delivery’ option enables you to pay in cash when our
+            delivery courier arrives at your residence. Just make sure your
+            address is correct so that your order will not be cancelled.
+          </p>
+        </div>
+      )}
     </form>
   );
 }
