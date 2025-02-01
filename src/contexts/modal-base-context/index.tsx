@@ -3,6 +3,7 @@ import {
   ReactNode,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from 'react';
@@ -11,6 +12,7 @@ import {
   ModalBaseActionsContextType,
   ModalBaseContextProviderProps,
 } from './index.types';
+import { lockBodyTagScrolling } from '@/utils';
 
 const ModalBaseStateContext = createContext<
   ModalBaseStateContextType | undefined
@@ -23,6 +25,10 @@ const ModalBaseActionsContext = createContext<
 function ModalBaseContextProvider({ children }: ModalBaseContextProviderProps) {
   const [modalBaseIsOpen, setModalBaseIsOpen] = useState(false);
   const [component, setComponent] = useState<ReactNode>(null);
+
+  useEffect(() => {
+    lockBodyTagScrolling(modalBaseIsOpen);
+  }, [modalBaseIsOpen]);
 
   const openModalBase = useCallback((modalContent: ReactNode) => {
     setComponent(modalContent);
