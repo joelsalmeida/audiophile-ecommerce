@@ -9,8 +9,11 @@ import {
   CheckoutFormDataType,
   checkoutFormSchema,
 } from './schemas/checkoutFormSchema';
-import { useGetZipCodeData } from '@/custom-hooks';
+import { useCartResumeData, useGetZipCodeData } from '@/custom-hooks';
 import { maskPhoneNumber, maskZipCode } from '@/utils';
+import { useModalBaseActions } from '@/contexts/modal-base-context';
+import { CheckoutModal } from '@/components/modals';
+import { useEffect } from 'react';
 
 export function CheckoutForm() {
   const {
@@ -19,10 +22,16 @@ export function CheckoutForm() {
     watch,
     setValue,
     control,
-    formState: { errors },
+    formState: { errors, isSubmitSuccessful },
+    reset,
   } = useForm<CheckoutFormDataType>({
     resolver: zodResolver(checkoutFormSchema),
+    defaultValues: {
+      paymentMethod: 'e-money',
+    },
   });
+
+  const { openModalBase } = useModalBaseActions();
 
   console.log('##### ERRORS: ', errors);
 
@@ -34,17 +43,35 @@ export function CheckoutForm() {
     error,
   } = useGetZipCodeData(Number(ZIP_CODE?.replace('-', '')));
 
-  if (zipCodeData) {
-    setValue('address', zipCodeData.street);
-    setValue('city', zipCodeData.city);
-    setValue('country', 'Brazil');
-  }
+  useEffect(() => {
+    if (zipCodeData) {
+      setValue('address', zipCodeData.street);
+      setValue('city', zipCodeData.city);
+      setValue('country', 'Brazil');
+    }
+  }, [zipCodeData]);
 
   console.log('##### CheckoutForm ZIP CODE: ', zipCodeData, isLoading, error);
 
+  const { data: cartResumeData } = useCartResumeData();
+
   const handleOnSubmit: SubmitHandler<CheckoutFormDataType> = (data) => {
-    console.log('##### DATA: ', data);
+    if (cartResumeData?.detailedItem) {
+      openModalBase(
+        <CheckoutModal
+          detailedItem={cartResumeData.detailedItem}
+          otherItemsQuantity={cartResumeData.otherItemsQuantity}
+          grandTotal={cartResumeData.grandTotal}
+        />,
+      );
+
+      console.log('##### SUBMITTED: ', data, cartResumeData);
+    }
   };
+
+  useEffect(() => {
+    if (isSubmitSuccessful) reset();
+  }, [isSubmitSuccessful, reset]);
 
   return (
     <form
@@ -151,20 +178,29 @@ export function CheckoutForm() {
         <div className={styles.checkoutForm__inputContainer}>
           <span className={styles.checkoutForm__label}>Payment Method</span>
 
-          <div className={styles.checkoutForm__inputContainer__item}>
-            <RadioButton
-              {...register('paymentMethod')}
-              label="e-Money"
-              id="e-money"
-              value="e-money"
-            />
-            <RadioButton
-              {...register('paymentMethod')}
-              label="Cash on Delivery"
-              id="cash-on-delivery"
-              value="cash-on-delivery"
-            />
-          </div>
+          <Controller
+            name="paymentMethod"
+            control={control}
+            render={({ field }) => (
+              <div className={styles.checkoutForm__inputContainer__item}>
+                <RadioButton
+                  {...field}
+                  label="e-Money"
+                  id="e-money"
+                  value="e-money"
+                  checked={field.value === 'e-money'}
+                />
+
+                <RadioButton
+                  {...field}
+                  label="Cash on Delivery"
+                  id="cash-on-delivery"
+                  value="cash-on-delivery"
+                  checked={field.value === 'cash-on-delivery'}
+                />
+              </div>
+            )}
+          />
         </div>
 
         <div className={styles.checkoutForm__inputContainer}>
