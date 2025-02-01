@@ -18,6 +18,8 @@ export function CheckoutSummary({
     { description: 'Grand total', value: grandTotal },
   ];
 
+  const isCartItemsEmpty = cartItems.length === 0;
+
   return (
     <div className={styles.checkoutSummary}>
       <strong className={styles.checkoutSummary__title}>Summary</strong>
@@ -61,6 +63,7 @@ export function CheckoutSummary({
         fullWidth={true}
         type="submit"
         form="checkout-form"
+        disabled={isCartItemsEmpty}
       >
         Continue & Pay
       </Button>
