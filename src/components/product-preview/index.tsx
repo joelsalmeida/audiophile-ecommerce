@@ -17,7 +17,7 @@ export function ProductPreview({ name, anchor, images }: ProductPreviewProps) {
 
       <span className={styles.productPreview__title}>{name}</span>
 
-      <Button asLink href="#" variant="contained">
+      <Button asLink href={anchor.href} variant="contained">
         {anchor.label}
       </Button>
     </div>

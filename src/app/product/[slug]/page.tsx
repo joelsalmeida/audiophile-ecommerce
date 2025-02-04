@@ -5,9 +5,13 @@ import { ImageGallery } from '@/components/image-gallery';
 import { ProductPreview } from '@/components/product-preview';
 import { InTheBox } from '../components/in-the-box';
 import { Features } from '../components/features';
-import { GET_PRODUCT_QUERY } from '@/lib/apollo-client/queries';
+import { GET_PRODUCT_WITH_RELATED_PRODUCTS } from '@/lib/apollo-client/queries';
 import { query } from '@/lib/apollo-client';
-import { formatToBrCurrency, getDifferenceBetweenDatesInDays } from '@/utils';
+import {
+  formatToBrCurrency,
+  getDifferenceBetweenDatesInDays,
+  getFirstWord,
+} from '@/utils';
 
 type ProductParams = {
   params: { slug: string };
@@ -16,7 +20,7 @@ type ProductParams = {
 // TODO: Make this page dynamic
 export default async function ProductPage({ params }: ProductParams) {
   const { data } = await query({
-    query: GET_PRODUCT_QUERY,
+    query: GET_PRODUCT_WITH_RELATED_PRODUCTS,
     variables: { productId: params.slug },
   });
 
@@ -74,8 +78,27 @@ export default async function ProductPage({ params }: ProductParams) {
         <h2 className={styles.alsoLike__title}>You may also like</h2>
 
         <div className={styles.alsoLike__products}>
-          {ALSO_LIKE.map((product) => (
-            <ProductPreview key={product.name} {...product} />
+          {data.relatedProducts.products.map((product) => (
+            <ProductPreview
+              key={product.name}
+              name={getFirstWord(product.name)}
+              anchor={{
+                href: `/product/${product._id}`,
+                label: 'See product',
+              }}
+              images={{
+                alt: product.name,
+                sm: {
+                  path: product.previewImage.paths.small,
+                },
+                md: {
+                  path: product.previewImage.paths.medium,
+                },
+                lg: {
+                  path: product.previewImage.paths.large,
+                },
+              }}
+            />
           ))}
         </div>
       </div>
