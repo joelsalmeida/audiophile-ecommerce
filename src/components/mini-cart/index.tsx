@@ -12,7 +12,8 @@ import { GET_CART_QUERY } from '@/lib/apollo-client/queries';
 import { useMutation } from '@apollo/client';
 import { Button } from '../inputs/button';
 import { useClickOutside } from '@/custom-hooks';
-import { useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
+import { shakeKeyframes } from './utilities';
 
 // TODO: Think about an empty state.
 // TODO: Think about a custom hook for cart manipulations.
@@ -56,6 +57,17 @@ export function MiniCart({ cartItems, open = false, onClose }: MiniCartProps) {
   const removeAllItemsHandler = () => {
     clearCartMutation();
   };
+
+  useEffect(() => {
+    const miniCart = document.getElementById('mini-cart-switcher-button');
+
+    if (!open) {
+      miniCart?.animate(shakeKeyframes, {
+        duration: 800,
+        easing: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)',
+      });
+    }
+  }, [cartItems]);
 
   const CART_ITEMS_TOTAL = useMemo(
     () => cartItems.reduce((acc, curr) => acc + curr.price * curr.quantity, 0),
