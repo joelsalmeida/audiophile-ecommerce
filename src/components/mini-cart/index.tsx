@@ -86,9 +86,9 @@ export function MiniCart({ cartItems, open = false, onClose }: MiniCartProps) {
         </button>
       </div>
 
-      <div>
+      <div className={styles.miniCart__items}>
         {cartItems.map((item) => (
-          <div className={styles.miniCart__item} key={item.id}>
+          <div className={styles.miniCart__items__item} key={item.id}>
             <ProductMiniCard
               name={item.name}
               price={formatToBrCurrency(item.price)}
