@@ -1,30 +1,26 @@
 'use client';
+
+import { useMiniCartContext } from '@/contexts/mini-cart-context';
 import { useClickOutside } from '@/custom-hooks';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useMemo, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
+import { MiniCart } from '../mini-cart';
 import { LINKS_DATA } from './helpers/links-data';
 import styles from './index.module.scss';
 import { renderLinksProp } from './index.types';
-import { MiniCart } from '../mini-cart';
-import { useQuery } from '@apollo/client';
-import { GET_CART_QUERY } from '@/lib/apollo-client/queries';
-import { useMiniCartContext } from '@/contexts/mini-cart-context';
-import { getFirstWord } from '@/utils';
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
   const toggleMobileMenu = () => setIsMobileMenuOpen((prevState) => !prevState);
 
-  const { isMiniCartOpen, openMiniCart, closeMiniCart } = useMiniCartContext();
-  const { data } = useQuery(GET_CART_QUERY);
-
   const NAV_REF = useRef(null);
   const HAMBURGER_REF = useRef(null);
-
   useClickOutside(NAV_REF, () => setIsMobileMenuOpen(false), [HAMBURGER_REF]);
+
+  const { openMiniCart } = useMiniCartContext();
 
   const CURRENT_PATH = usePathname();
 
@@ -35,21 +31,12 @@ export function Header() {
         href={href}
         key={href}
         data-active={CURRENT_PATH === href}
-        onClick={() => setIsMobileMenuOpen(false)}
+        onClick={() => closeMobileMenu()}
       >
         {label}
       </Link>
     ));
   }
-
-  const CART_ITEMS = useMemo(() => {
-    const cartItems = data?.getCart?.cartItems ?? [];
-
-    return cartItems.map((item) => ({
-      ...item,
-      name: getFirstWord(item.name),
-    }));
-  }, [data?.getCart?.cartItems]);
 
   return (
     <header className={styles.header__container}>
@@ -92,11 +79,7 @@ export function Header() {
           <Image src="/cart-icon.svg" alt="Open cart" width={23} height={20} />
         </button>
 
-        <MiniCart
-          cartItems={CART_ITEMS}
-          open={isMiniCartOpen}
-          onClose={closeMiniCart}
-        />
+        <MiniCart />
       </div>
     </header>
   );
