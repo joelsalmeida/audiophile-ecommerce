@@ -1,14 +1,12 @@
-// 'use client';
-import styles from './index.module.scss';
-import { Button } from '../inputs/button';
-import { QuantitySelector } from '../inputs/quantity-selector';
-import { AddToCartProps } from './index.types';
-import { useState } from 'react';
-import { useMutation } from '@apollo/client';
+'use client';
+
 import { ADD_TO_CART_MUTATION } from '@/lib/apollo-client/mutations';
 import { GET_CART_QUERY } from '@/lib/apollo-client/queries';
+import { useMutation } from '@apollo/client';
+import { useState } from 'react';
+import { AddToCartProps } from './index.types';
+import { AddToCartUi } from './index.ui';
 
-// TODO: Improve on click handler logic
 export function AddToCart({ productId, price }: AddToCartProps) {
   const [quantity, setQuantity] = useState(1);
 
@@ -17,41 +15,31 @@ export function AddToCart({ productId, price }: AddToCartProps) {
   });
 
   function increment() {
-    setQuantity((prevValue) => prevValue + 1);
+    setQuantity((prev) => prev + 1);
   }
 
   function decrement() {
-    setQuantity((prevValue) => prevValue - 1);
+    setQuantity((prev) => Math.max(1, prev - 1));
   }
 
-  const addToCartHandler = async (id: string) => {
-    const addToCartInput = {
-      _id: id,
-      quantity,
-    };
-
-    const { data, errors } = await addToCartMutation({
-      variables: { addToCartInput },
+  async function handleAddToCart() {
+    await addToCartMutation({
+      variables: {
+        addToCartInput: {
+          _id: productId,
+          quantity,
+        },
+      },
     });
-
-    console.log('##### addToCartHandler : ', data, errors);
-  };
+  }
 
   return (
-    <div className={styles.addToCart}>
-      <span className={styles.addToCart__price}>{price}</span>
-
-      <div className={styles.addToCart__addSection}>
-        <QuantitySelector
-          increment={increment}
-          decrement={decrement}
-          currentQuantity={quantity}
-        />
-
-        <Button variant="contained" onClick={() => addToCartHandler(productId)}>
-          Add to cart
-        </Button>
-      </div>
-    </div>
+    <AddToCartUi
+      price={price}
+      quantity={quantity}
+      onIncrement={increment}
+      onDecrement={decrement}
+      onAddToCart={handleAddToCart}
+    />
   );
 }
