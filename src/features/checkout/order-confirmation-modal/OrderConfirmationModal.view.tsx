@@ -1,25 +1,16 @@
-import type { CheckoutModalProps } from './index.types';
-import styles from './index.module.scss';
 import { Button } from '@/components/inputs/button';
-import { CartResume } from '@/components/cart-resume';
-import { useRouter } from 'next/navigation';
-import { useModalBaseActions } from '@/contexts/modal-base-context';
+import { OrderResume } from '@/features/checkout/order-confirmation-modal/elements/order-resume';
+import type { OrderConfirmationModalViewProps } from './OrderConfirmationModal.view.types';
+import styles from './order-confirmation-modal.module.scss';
 
-export function CheckoutModal({
+export function OrderConfirmationModalView({
   detailedItem,
   otherItemsQuantity,
   grandTotal,
-}: CheckoutModalProps) {
-  const router = useRouter();
-  const { closeModalBase } = useModalBaseActions();
-
-  function handleBackToHome() {
-    closeModalBase();
-    router.push('/');
-  }
-
+  backToHomeHandler,
+}: OrderConfirmationModalViewProps) {
   return (
-    <div className={styles.checkoutModal}>
+    <div className={styles.orderConfirmationModal}>
       <svg
         width="64"
         height="64"
@@ -35,22 +26,22 @@ export function CheckoutModal({
         />
       </svg>
 
-      <span className={styles.checkoutModal__title}>
+      <span className={styles.orderConfirmationModal__title}>
         THANK YOU <br />
         FOR YOUR ORDER
       </span>
 
-      <p className={styles.checkoutModal__description}>
+      <p className={styles.orderConfirmationModal__description}>
         You will receive an email confirmation shortly.
       </p>
 
-      <CartResume
+      <OrderResume
         detailedItem={detailedItem}
         otherItemsQuantity={otherItemsQuantity}
         grandTotal={grandTotal}
       />
 
-      <Button variant="contained" fullWidth onClick={handleBackToHome}>
+      <Button variant="contained" fullWidth onClick={backToHomeHandler}>
         Back to home
       </Button>
     </div>
