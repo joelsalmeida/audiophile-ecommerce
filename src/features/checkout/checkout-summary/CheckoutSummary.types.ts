@@ -1,10 +1,4 @@
-type CartItem = {
-  id: string;
-  name: string;
-  imagePath: string;
-  price: number;
-  quantity: number;
-};
+import { CartItems } from '@/features/cart/index.types';
 
 type TotalCost = {
   VAT: number;
@@ -14,6 +8,6 @@ type TotalCost = {
 };
 
 export type CheckoutSummaryProps = {
-  cartItems: CartItem[];
+  cartItems: CartItems;
   totalCost: TotalCost;
 };

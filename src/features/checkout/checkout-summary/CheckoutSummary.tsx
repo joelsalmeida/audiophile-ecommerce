@@ -1,9 +1,9 @@
-import styles from './index.module.scss';
-import { CheckoutSummaryProps } from './index.types';
-import { ProductMiniCard } from '../product-mini-card';
+import { Button } from '@/components/inputs/button';
+import { ProductMiniCard } from '@/components/product-mini-card';
 import { formatToBrCurrency } from '@/utils';
-import { Button } from '../inputs/button';
-import { CheckoutSummaryPrice } from './checkout-summary-price/index.';
+import styles from './checkout-summary.module.scss';
+import { CheckoutSummaryProps } from './CheckoutSummary.types';
+import { CheckoutSummaryPrice } from './elements';
 
 export function CheckoutSummary({
   cartItems,

@@ -1,6 +1,6 @@
-import { CheckoutSummaryPriceProps } from './index.types';
 import { formatToBrCurrency } from '@/utils';
-import styles from './index.module.scss';
+import styles from './checkout-summary-price.module.scss';
+import { CheckoutSummaryPriceProps } from './CheckoutSummaryPrice.types';
 
 export function CheckoutSummaryPrice({
   description,
