@@ -3,8 +3,8 @@
 import { TextField } from '@/components/inputs/text-field';
 import { maskPhoneNumber } from '@/utils';
 import { Controller } from 'react-hook-form';
-import styles from '../../index.module.scss';
-import { CheckoutFormData } from '../../index.types';
+import styles from '../checkout-form.module.scss';
+import { CheckoutFormData } from '../CheckoutForm.types';
 
 export function BillingSection({ checkoutForm }: CheckoutFormData) {
   const {

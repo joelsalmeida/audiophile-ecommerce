@@ -2,16 +2,16 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { CheckoutFormView } from './CheckoutForm.view';
 import {
   useCheckoutOrder,
   useCheckoutResetOnSubmit,
   useZipCodeAutofill,
 } from './hooks';
-import { CheckoutFormUi } from './index.ui';
 import {
   CheckoutFormDataType,
   checkoutFormSchema,
-} from './schemas/checkoutFormSchema';
+} from './schemas/checkout-form.schema';
 
 export function CheckoutForm() {
   const checkoutForm = useForm<CheckoutFormDataType>({
@@ -28,7 +28,7 @@ export function CheckoutForm() {
   const { onSubmit } = useCheckoutOrder();
 
   return (
-    <CheckoutFormUi
+    <CheckoutFormView
       onSubmit={checkoutForm.handleSubmit(onSubmit)}
       checkoutForm={checkoutForm}
     />

@@ -1,7 +1,7 @@
 import { useGetZipCodeData } from '@/custom-hooks';
 import { useEffect } from 'react';
 import { UseFormReturn } from 'react-hook-form';
-import { CheckoutFormDataType } from '../../schemas/checkoutFormSchema';
+import { CheckoutFormDataType } from '../schemas/checkout-form.schema';
 
 export function useZipCodeAutofill(form: UseFormReturn<CheckoutFormDataType>) {
   const zipCode = form.watch('zipCode');

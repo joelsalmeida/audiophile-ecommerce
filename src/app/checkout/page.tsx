@@ -1,10 +1,11 @@
 'use client';
-import { CheckoutForm } from '@/components/forms/checkout-form';
-import styles from './page.module.scss';
-import { CheckoutSummary } from '@/components/checkout-summary';
+
+import { CheckoutForm } from '@/features/checkout/checkout-form';
+import { CheckoutSummary } from '@/features/checkout/checkout-summary/CheckoutSummary';
 import { GET_CART_QUERY } from '@/lib/apollo-client/queries';
-import { useQuery } from '@apollo/client';
 import { TOTAL_COST_FALLBACK } from '@/utils/fallback-props';
+import { useQuery } from '@apollo/client';
+import styles from './page.module.scss';
 
 export default function CheckoutPage() {
   const { data } = useQuery(GET_CART_QUERY);
